@@ -24,3 +24,32 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@layer components {
+
+  .btn {
+    @apply px-6 py-2 rounded text-white transition;
+  }
+
+  .btn-primary {
+    @apply bg-blue-500 hover:bg-blue-600;
+  }
+
+  .input {
+    @apply border p-2
+  }
+
+  .heading1 {
+    @apply mb-4 text-4xl px-2 text-white bg-blue-600 rounded-sm dark:bg-blue-500
+  }
+
+  .testBox {
+    @apply items-center gap-4 border-2 border-dashed border-blue-500 p-8
+  }
+
+  .navbarStyle {
+    @apply bg-blue-600 p-4 text-white text-xl text-center
+  }
+
+}
+
