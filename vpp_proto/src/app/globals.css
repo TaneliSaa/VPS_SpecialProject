@@ -51,5 +51,9 @@ body {
     @apply bg-blue-600 p-4 text-white text-xl text-center
   }
 
+  .navbarSimulations {
+    @apply flex items-center gap-6 bg-gray-400 p-4 text-white text-xl
+  }
+
 }
 

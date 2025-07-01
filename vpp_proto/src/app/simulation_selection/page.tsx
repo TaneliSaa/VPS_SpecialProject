@@ -10,7 +10,7 @@ export default function Page() {
 
                 <div className="flex flex-col items-center gap-4 border-2 border-dashed border-blue-500 p-8">
 
-                    <Link href="">
+                    <Link href="simulation">
                         <button className="btn btn-primary">Simulation 1</button>
                     </Link>
 

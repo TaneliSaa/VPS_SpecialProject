@@ -8,7 +8,7 @@ export default function Page() {
         <div>
             <p>Credits page</p>
 
-            <Link href="home">
+            <Link href="/">
                 <button className="btn btn-primary">Back</button>
             </Link>
 

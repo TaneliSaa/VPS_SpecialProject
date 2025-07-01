@@ -7,7 +7,7 @@ export default function Page() {
         <div>
             <p>About page</p>
 
-            <Link href="home">
+            <Link href="/">
                 <button className="btn btn-primary">Back</button>
             </Link>
 

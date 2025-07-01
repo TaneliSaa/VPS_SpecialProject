@@ -13,8 +13,8 @@ export default function Page() {
 
         const res = await fetch("/api/login", {
             method: "POST",
-            headers: {"Content-Type": "Application/json"},
-            body: JSON.stringify({username, password}),
+            headers: { "Content-Type": "Application/json" },
+            body: JSON.stringify({ username, password }),
         });
 
         if (res.ok) {
@@ -27,7 +27,7 @@ export default function Page() {
 
     return (
         <div >
-            
+
 
 
 
@@ -51,14 +51,15 @@ export default function Page() {
                         onChange={(e) => setPassword(e.target.value)}
                     />
 
-
-                    <Link href="home">
-                        <button className="btn btn-primary">Back</button>
-                    </Link>
-
                     <button type="submit" className="btn btn-primary">
                         Login
                     </button>
+
+                    <Link href="/">
+                        <button className="btn btn-primary">Back</button>
+                    </Link>
+
+
 
                 </form>
 
