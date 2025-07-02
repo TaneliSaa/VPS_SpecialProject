@@ -1,26 +1,38 @@
+"use client"
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Page() {
-    return(
+
+
+    const router = useRouter();
+
+    const handleSimulationSelect = (patientId: number) => {
+        router.push(`/simulation?patientId=${patientId}`);
+    };
+
+
+
+    return (
 
 
         <div>
-
             <div className=" h-screen flex justify-center items-center bg-gray-100">
 
                 <div className="flex flex-col items-center gap-4 border-2 border-dashed border-blue-500 p-8">
 
-                    <Link href="simulation">
-                        <button className="btn btn-primary">Simulation 1</button>
-                    </Link>
+                    <button className="btn btn-primary"
+                        onClick={() => handleSimulationSelect(1)}
+                    >Simulation 1</button>
 
-                    <Link href="">
-                        <button className="btn btn-primary">Simulation 2</button>
-                    </Link>
+                    <button className="btn btn-primary"
+                        onClick={() => handleSimulationSelect(2)}
+                    >Simulation 2</button>
 
-                    <Link href="">
-                        <button className="btn btn-primary">Simulation 3</button>
-                    </Link>    
+                    <button className="btn btn-primary"
+                        onClick={() => handleSimulationSelect(3)}
+                    >Simulation 3</button>
+
                 </div>
             </div>
         </div>
