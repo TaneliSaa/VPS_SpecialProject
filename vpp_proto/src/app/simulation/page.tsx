@@ -6,6 +6,7 @@ import patient3 from "@/app/assets/Patient3.jpg";
 import Image, { StaticImageData } from "next/image";
 import PatientInformation from "../components/PatientInformation";
 import PatientIntroduction from "../components/PatientIntroduction";
+import ActivityLog from "../components/ActivityLog";
 import { useState } from "react";
 import TakeTests from "../components/TakeTests";
 import Diagnose from "../components/Diagnose";
@@ -120,9 +121,9 @@ export default function Page() {
 
                     <div className="h-2/4 border border-black-400 p-4">
 
-                        <button className="btn btn-primary translate-y-56">
-                            Notes
-                        </button>
+                        <ActivityLog />
+                        
+                        
                     </div>
 
                 </div>
