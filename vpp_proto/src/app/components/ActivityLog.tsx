@@ -67,14 +67,14 @@ const ActivityLog: React.FC<{ simulationId: number | null }> = ({ simulationId }
         if (res.ok) {
             const logRes = await fetch("/api/activityLog/fetchLogs", {
                 method: "POST",
-                headers: { "Content-Type": "application/json"},
-                body: JSON.stringify({simulationId}),
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ simulationId }),
             });
             const data = await logRes.json();
             setLog(data.logs || []);
         }
 
-        console.log("Sending log entry: ", {user_id: user.id, simulation_id: simulationId, ...newEntry});
+        console.log("Sending log entry: ", { user_id: user.id, simulation_id: simulationId, ...newEntry });
     };
 
 
@@ -86,19 +86,41 @@ const ActivityLog: React.FC<{ simulationId: number | null }> = ({ simulationId }
         const handleClick = (event: MouseEvent) => {
             const target = event.target as HTMLElement;
             const minimalValue = 0;
+            const buttonText = target.innerText.toLowerCase();
             if (target.tagName === "BUTTON") {
-                const buttonText = target.innerText.toLowerCase();
                 addLogEntry("Button Click", `Clicked button: ${target.innerText}`);
+
+                if (buttonText.includes("submit")) {
+                    if (Object.keys(inputLogs).length > minimalValue) {
+                        for (const field in inputLogs) {
+                            addLogEntry("Text Input", `Typed in ${field}: "${inputLogs[field]}"`);
+                        }
+                        setInputLogs({});
+                    }
+                }
             }
         };
 
+        const handleInput = (event: Event) => {
+            const target = event.target as HTMLInputElement | HTMLTextAreaElement;
+            if (target.tagName === "INPUT" || target.tagName === "TEXTAREA") {
+                const fieldName = target.getAttribute("name") || "unknown";
+                setInputLogs((prev) => ({
+                    ...prev,
+                    [fieldName]: target.value,
+                }));
+            }
+        }
+
         document.addEventListener("click", handleClick);
+        document.addEventListener("input", handleInput);
 
         return () => {
             document.removeEventListener("click", handleClick);
+            document.removeEventListener("input", handleInput);
         }
 
-    }, [user,simulationId])
+    }, [user, inputLogs, simulationId])
 
     return (
         <div className="activityLog">

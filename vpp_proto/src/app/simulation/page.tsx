@@ -182,8 +182,9 @@ export default function Page() {
                         <input
                             className="w-[550px] h-[50px] border border-gray-400 rounded p-2 resize-none translate-x-40"
                             placeholder="Your questions here"
+                            name="Patient question input"
                         />
-                        <button className="btn btn-primary translate-x-42">Submit</button>
+                        <button name="submit" className="btn btn-primary translate-x-42">Submit</button>
 
 
                     </div>

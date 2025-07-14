@@ -18,7 +18,7 @@ const Diagnose = ({
 
     const handleSubmit = () => {
 
-
+        
     }
 
 
@@ -38,7 +38,7 @@ const Diagnose = ({
                     onChange={(e) => setDiagnosis(e.target.value)}
                     className="w-full p-2 mt-1 border rounder-lg"
                     placeholder="Type your diagnosis here..."
-                    name="diagnose text-area"
+                    name="diagnose input"
                 >
                 </input>
                 <div className="mt-3 flex gap-2 translate-y-70">
