@@ -7,11 +7,12 @@ import Image, { StaticImageData } from "next/image";
 import PatientInformation from "../components/PatientInformation";
 import PatientIntroduction from "../components/PatientIntroduction";
 import ActivityLog from "../components/ActivityLog";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import TakeTests from "../components/TakeTests";
 import Diagnose from "../components/Diagnose";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
+import { useAuth } from "../components/AuthContext";
 
 
 export default function Page() {
@@ -20,6 +21,8 @@ export default function Page() {
     const [isPatientIntroductionOpen, setIsPatientIntroductionOpen] = useState(false);
     const [isTakeTestOpen, setIsTakeTestOpen] = useState(false);
     const [isDiagnoseOpen, setIsDiagnoseOpen] = useState(false);
+    const [simulationId,setSimulationId] = useState<number | null>(null);
+    const {user} = useAuth();
     const router = useRouter();
     const searchParams = useSearchParams();
     const patientId = searchParams.get('patientId');
@@ -30,13 +33,35 @@ export default function Page() {
     }
 
     const nullFixPatientId = patientId ?? "";
-
     const imageSrc = patientImages[nullFixPatientId];
-
+    
 
     const endSimulation = () => {
         router.push("/simulation_selection");
     }
+
+    //Simulation start
+    useEffect(() => {
+        const startSimulation = async () => {
+            const res = await fetch("/api/simulationStart", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({user_id: user?.id}),
+            });
+        
+            const data = await res.json();
+            console.log("SIMULATION DATA: ", data);
+            setSimulationId(data.simulation_id);
+            console.log("SIMULATION ID: ", simulationId);
+            
+
+            const startTime = new Date().toISOString();
+        };
+
+        if (user?.id) {
+            startSimulation();
+        }
+    },[user])
 
     return (
 
@@ -121,8 +146,12 @@ export default function Page() {
 
                     <div className="h-2/4 border border-black-400 p-4">
 
-                        <ActivityLog />
                         
+                       { simulationId && (<ActivityLog 
+                            simulationId={simulationId}
+
+                        />)}
+                            
                         
                     </div>
 

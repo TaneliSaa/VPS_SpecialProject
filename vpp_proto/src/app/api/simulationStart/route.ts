@@ -1,4 +1,3 @@
-import { error } from "console";
 import { NextResponse } from "next/server";
 import db from "@/app/lib/db"
 
