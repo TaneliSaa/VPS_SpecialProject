@@ -4,19 +4,22 @@ import { useEffect, useState } from "react";
 import { useAuth } from "./AuthContext";
 
 
+interface Props {
+    simulationId: number | null;
+}
+
+
 interface LogEntry {
     type: string,
     message: string,
     timestamp: string
 }
 
-const ActivityLog: React.FC<{ simulationId: number | null }> = ({ simulationId }) => {
+const ActivityLog = ({simulationId} : Props) => {
 
     const { user } = useAuth();
     const [log, setLog] = useState<LogEntry[]>([]);
     const [inputLogs, setInputLogs] = useState<Record<string, string>>({});
-
-
 
 
     const formatTimeStampForMySQL = () => {

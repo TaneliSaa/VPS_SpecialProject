@@ -1,13 +1,10 @@
 
-
-
-const TakeTests = ({
-    isOpen,
-    onClose,
-}: {
+interface Props {
     isOpen: Boolean;
     onClose: () => void;
-}) => {
+}
+
+const TakeTests = ({isOpen, onClose}: Props)=> {
 
     if (!isOpen) return null;
 

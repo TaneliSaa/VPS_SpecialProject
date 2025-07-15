@@ -1,13 +1,11 @@
 
-
-
-const PatientIntroduction = ({
-    isOpen,
-    onClose,
-} : {
+interface Props {
     isOpen: Boolean;
     onClose: () => void;
-}) => {
+}
+
+
+const PatientIntroduction = ({isOpen, onClose}: Props)=> {
 
     if (!isOpen) return null;
 
@@ -18,10 +16,6 @@ const PatientIntroduction = ({
         <div>
 
             <h2 className="text-lg font-bold">Patient Introduction</h2>
-
-
-
-
 
             <button
                 className="btn btn-primary translate-y-87"

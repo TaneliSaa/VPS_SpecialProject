@@ -1,5 +1,4 @@
 "use client"
-
 import patient1 from "@/app/assets/Patient1.jpg";
 import patient2 from "@/app/assets/Patient2.jpg";
 import patient3 from "@/app/assets/Patient3.jpg";
@@ -122,6 +121,7 @@ export default function Page() {
 
                         <PatientInformation
                             patientId={patientId}
+                            simulationId = {simulationId}
                             isOpen={isPatientInformationOpen}
                             onClose={() => setIsPatientInformationOpen(false)}
                         />
@@ -137,6 +137,8 @@ export default function Page() {
                         />
 
                         <Diagnose
+                        userId={user?.id}
+                            simulationId={simulationId}
                             isOpen={isDiagnoseOpen}
                             onClose={() => setIsDiagnoseOpen(false)}
                         />
