@@ -12,6 +12,7 @@ import Diagnose from "../components/Diagnose";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useAuth } from "../components/AuthContext";
+import PatientDialogue from "../components/PatientDialogue";
 
 
 export default function Page() {
@@ -175,18 +176,7 @@ export default function Page() {
 
                     <div className="flex-c justify-center h-2/4 border border-black-400 p-4">
 
-                        <textarea
-                            className="w-[550px] h-[200px] border border-gray-400 rounded p-2 resize-none translate-x-40"
-                            value="Patient responses area"
-                            readOnly
-                        />
-
-                        <input
-                            className="w-[550px] h-[50px] border border-gray-400 rounded p-2 resize-none translate-x-40"
-                            placeholder="Your questions here"
-                            name="Patient question input"
-                        />
-                        <button name="submit" className="btn btn-primary translate-x-42">Submit</button>
+                        <PatientDialogue />
 
 
                     </div>
