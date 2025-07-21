@@ -7,8 +7,8 @@ export default function Page() {
 
     const router = useRouter();
 
-    const handleSimulationSelect = (patientId: number) => {
-        router.push(`/simulation?patientId=${patientId}`);
+    const handleSimulationSelect = (patientId: number, category: string) => {
+        router.push(`/simulation?patientId=${patientId}&category=${category}`);
     };
 
 
@@ -22,16 +22,16 @@ export default function Page() {
                 <div className="flex flex-col items-center gap-4 border-2 border-dashed border-blue-500 p-8">
 
                     <button className="btn btn-primary"
-                        onClick={() => handleSimulationSelect(1)}
-                    >Simulation 1</button>
+                        onClick={() => handleSimulationSelect(1, "cardiovascular")}
+                    >Cardiovascular Simulation</button>
 
                     <button className="btn btn-primary"
-                        onClick={() => handleSimulationSelect(2)}
-                    >Simulation 2</button>
+                        onClick={() => handleSimulationSelect(2, "neurological")}
+                    >Neurological Simulation</button>
 
                     <button className="btn btn-primary"
-                        onClick={() => handleSimulationSelect(3)}
-                    >Simulation 3</button>
+                        onClick={() => handleSimulationSelect(3,"common")}
+                    >Common Simulation</button>
 
                 </div>
             </div>

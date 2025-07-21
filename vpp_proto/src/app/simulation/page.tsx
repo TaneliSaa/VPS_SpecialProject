@@ -26,6 +26,7 @@ export default function Page() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const patientId = searchParams.get('patientId');
+    const category = searchParams.get('category');
     const patientImages: Record<string, StaticImageData> = {
         "1": patient1,
         "2": patient2,
@@ -46,7 +47,7 @@ export default function Page() {
             const res = await fetch("/api/simulationStart", {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
-                body: JSON.stringify({user_id: user?.id}),
+                body: JSON.stringify({user_id: user?.id, category: category}),
             });
         
             const data = await res.json();
