@@ -22,6 +22,7 @@ interface PatientRow extends RowDataPacket {
     personality: string;
 }
 
+
 export async function POST(req: Request) {
 
     try {
@@ -96,7 +97,7 @@ export async function POST(req: Request) {
             ]
         );
 
-        return NextResponse.json({ message });
+        return NextResponse.json({ message: conversation });
 
     } catch (error) {
         console.error("[patientDialogue Error: ]", error);

@@ -2,20 +2,29 @@
 
 import { useState } from "react";
 
+interface Props {
+    simulationId: number | null;
+}
 
-const PatientDialogue = () => {
+
+
+const PatientDialogue = ({ simulationId }: Props) => {
     const [input, setInput] = useState("");
     const [response, setResponse] = useState("");
 
     const talkToPatient = async () => {
-        const res = await fetch("/api/virtualPatient", {
+        const res = await fetch("/api/patientDialogue", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ prompt: input }),
+            body: JSON.stringify({
+                prompt: input,
+                simulation_id: simulationId
+            }),
         });
 
         const data = await res.json();
-        setResponse(data.message);
+        console.log("Dialogue message: ", data.message.answer);
+        setResponse(data.message.answer);
     };
 
 
@@ -30,7 +39,7 @@ const PatientDialogue = () => {
                 value={response}
                 readOnly
             >
-                
+
             </textarea>
 
             <input

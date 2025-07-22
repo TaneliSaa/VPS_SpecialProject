@@ -2,12 +2,23 @@
 interface Props {
     isOpen: Boolean;
     onClose: () => void;
+    simulationId: number | null;
 }
 
-const TakeTests = ({isOpen, onClose}: Props)=> {
+const TakeTests = ({isOpen, onClose, simulationId}: Props)=> {
 
     if (!isOpen) return null;
 
+
+    const handleClick = async () => {
+
+        const res = await fetch("/api/generateTest", {
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+                simulation_id: simulationId,
+            }),
+        });
+    }
 
 
     return (

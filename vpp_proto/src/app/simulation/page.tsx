@@ -26,7 +26,7 @@ export default function Page() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const patientId = searchParams.get('patientId');
-    const category = searchParams.get('category');
+    const simulationIdParam = searchParams.get('simulationId');
     const patientImages: Record<string, StaticImageData> = {
         "1": patient1,
         "2": patient2,
@@ -41,28 +41,12 @@ export default function Page() {
         router.push("/simulation_selection");
     }
 
-    //Simulation start
     useEffect(() => {
-        const startSimulation = async () => {
-            const res = await fetch("/api/simulationStart", {
-                method: "POST",
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify({user_id: user?.id, category: category}),
-            });
-        
-            const data = await res.json();
-            console.log("SIMULATION DATA: ", data);
-            setSimulationId(data.simulation_id);
-            console.log("SIMULATION ID: ", simulationId);
-            
-
-            const startTime = new Date().toISOString();
-        };
-
-        if (user?.id) {
-            startSimulation();
+        const simId = searchParams.get("simulationId");
+        if (simId) {
+            setSimulationId(Number(simId));
         }
-    },[user])
+    },[searchParams])
 
     return (
 
@@ -131,11 +115,13 @@ export default function Page() {
                         <PatientIntroduction
                             isOpen={isPatientIntroductionOpen}
                             onClose={() => setIsPatientIntroductionOpen(false)}
+                            simulationId={simulationId}
                         />
 
                         <TakeTests
                             isOpen={isTakeTestOpen}
                             onClose={() => setIsTakeTestOpen(false)}
+                            simulationId={simulationId}
                         />
 
                         <Diagnose
@@ -177,7 +163,11 @@ export default function Page() {
 
                     <div className="flex-c justify-center h-2/4 border border-black-400 p-4">
 
-                        <PatientDialogue />
+                        <PatientDialogue
+                            simulationId={simulationId}
+                        
+                        
+                        />
 
 
                     </div>
