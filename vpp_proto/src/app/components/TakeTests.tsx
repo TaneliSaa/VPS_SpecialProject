@@ -1,38 +1,78 @@
+"use client"
+
+import { useEffect, useState } from "react";
 
 interface Props {
     isOpen: Boolean;
     onClose: () => void;
     simulationId: number | null;
+    patientId: number | null;
 }
 
-const TakeTests = ({isOpen, onClose, simulationId}: Props)=> {
+interface TestResult {
+    test_type: string;
+    result: string;
+}
+
+const TakeTests = ({ isOpen, onClose, simulationId, patientId }: Props) => {
+
+    const [testButtons, setTestButtons] = useState<TestResult[]>([]);
+
+
+
+    useEffect(() => {
+        const fetchTests = async () => {
+
+            if (!patientId) return;
+
+            try {
+                const res = await fetch("/api/getTestResults", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        patient_id: patientId,
+                    }),
+                });
+
+                const results = await res.json();
+
+                if (res.ok) {
+                    console.log("TEST RESULTS: ", results);
+                    setTestButtons(results.test_results);
+                } else {
+                    console.error("Error: ", results.message);
+                }
+            } catch (error) {
+                console.error("Something went wrong.", error);
+            }
+        }
+        fetchTests();
+    }, [patientId]);
+
+
+    
 
     if (!isOpen) return null;
-
-
-    const handleClick = async () => {
-
-        const res = await fetch("/api/generateTest", {
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({
-                simulation_id: simulationId,
-            }),
-        });
-    }
-
-
     return (
 
         <div>
 
             <h2 className="text-lg font-bold">Take Test</h2>
 
-            <div className="flex col gap-2">
-                <button className="btn btn-primary">Test 1</button>
-                <button className="btn btn-primary">Test 2</button>
-                <button className="btn btn-primary">Test 3</button>
 
+            <div className="flex col gap-2">
+                {testButtons.map((test, index) => (
+                    <button
+                        key={index}
+                        className="btn btn-primary"
+                    >
+                        {test.test_type}
+                    </button>
+                ))
+
+                }
             </div>
+
 
             <button
                 onClick={onClose}

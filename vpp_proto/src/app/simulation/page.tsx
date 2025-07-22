@@ -22,11 +22,11 @@ export default function Page() {
     const [isTakeTestOpen, setIsTakeTestOpen] = useState(false);
     const [isDiagnoseOpen, setIsDiagnoseOpen] = useState(false);
     const [simulationId,setSimulationId] = useState<number | null>(null);
+    const [patientIdDatabase, setPatientIdDatabase] = useState<number | null>(null);
     const {user} = useAuth();
     const router = useRouter();
     const searchParams = useSearchParams();
     const patientId = searchParams.get('patientId');
-    const simulationIdParam = searchParams.get('simulationId');
     const patientImages: Record<string, StaticImageData> = {
         "1": patient1,
         "2": patient2,
@@ -43,8 +43,10 @@ export default function Page() {
 
     useEffect(() => {
         const simId = searchParams.get("simulationId");
-        if (simId) {
+        const patId = searchParams.get("patientDatabaseId");
+        if (simId && patId) {
             setSimulationId(Number(simId));
+            setPatientIdDatabase(Number(patId));
         }
     },[searchParams])
 
@@ -122,6 +124,7 @@ export default function Page() {
                             isOpen={isTakeTestOpen}
                             onClose={() => setIsTakeTestOpen(false)}
                             simulationId={simulationId}
+                            patientId={patientIdDatabase}
                         />
 
                         <Diagnose

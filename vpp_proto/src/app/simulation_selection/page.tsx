@@ -29,14 +29,14 @@ export default function Page() {
 
             const simulationData = await simulationStart.json();
             const simulationIdData = simulationData.simulation_id;
-            
+
 
             if (!simulationData) {
                 console.error("Failed to create simulation.", simulationData);
                 return;
             }
 
-            
+
 
             const patientGeneration = await fetch("/api/virtualPatient", {
                 method: "POST",
@@ -52,7 +52,36 @@ export default function Page() {
                 console.error("Failed to create patient.")
                 return;
             }
-            router.push(`/simulation?patientId=${patientId}&simulationId=${simulationIdData}`);
+
+            const testGeneration = await fetch("/api/generateTest", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    simulation_id: simulationIdData,
+                }),
+            });
+
+            const testData = await testGeneration.json();
+            console.log("TEST DATA: ", testData);
+
+            if (!testData) {
+                console.log("Failed to create tests.");
+                return;
+            }
+
+            const PatientInformation = await fetch("/api/getPatientInformation", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({
+                    simulation_id: simulationIdData,
+                }),
+            });
+
+            const patientInformationData = await PatientInformation.json();
+            console.log("PATIENT INFORMATION DATA: ", patientInformationData)
+            const patientDatabaseId = patientInformationData.patient[0].id;
+
+            router.push(`/simulation?patientId=${patientId}&simulationId=${simulationIdData}&patientDatabaseId=${patientDatabaseId}`);
 
         } finally {
             setLoading(false);

@@ -93,7 +93,7 @@ export async function POST(req: Request) {
             ]
         );
 
-        return NextResponse.json({ message });
+        return NextResponse.json({ message: profile });
 
     } catch (error) {
         console.error("[Groq API Error]", error)
