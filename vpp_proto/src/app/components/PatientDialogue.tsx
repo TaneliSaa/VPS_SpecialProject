@@ -34,7 +34,7 @@ const PatientDialogue = ({ simulationId }: Props) => {
 
         <div>
             <textarea
-                className="w-[550px] h-[200px] border border-gray-400 rounded p-2 resize-none translate-x-40"
+                className="patientResponseTextArea"
                 placeholder="Patient responses area"
                 value={response}
                 readOnly
@@ -42,20 +42,26 @@ const PatientDialogue = ({ simulationId }: Props) => {
 
             </textarea>
 
-            <input
-                className="w-[550px] h-[50px] border border-gray-400 rounded p-2 resize-none translate-x-40"
-                placeholder="Your questions here"
-                name="Patient question input"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-            />
-            <button
-                name="submit"
-                onClick={talkToPatient}
-                className="btn btn-primary translate-x-42"
-            >
-                Submit
-            </button>
+            <div className="questionInputBox">
+
+                <input
+                    className="userQuestionInputArea"
+                    placeholder="Your questions here"
+                    name="Patient question input"
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                />
+                <button
+                    name="submit"
+                    onClick={talkToPatient}
+                    className="btn btn-primary"
+                >
+                    Submit
+                </button>
+
+
+            </div>
+
         </div>
 
     )

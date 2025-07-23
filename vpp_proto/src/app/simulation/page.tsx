@@ -21,9 +21,9 @@ export default function Page() {
     const [isPatientIntroductionOpen, setIsPatientIntroductionOpen] = useState(false);
     const [isTakeTestOpen, setIsTakeTestOpen] = useState(false);
     const [isDiagnoseOpen, setIsDiagnoseOpen] = useState(false);
-    const [simulationId,setSimulationId] = useState<number | null>(null);
+    const [simulationId, setSimulationId] = useState<number | null>(null);
     const [patientIdDatabase, setPatientIdDatabase] = useState<number | null>(null);
-    const {user} = useAuth();
+    const { user } = useAuth();
     const router = useRouter();
     const searchParams = useSearchParams();
     const patientId = searchParams.get('patientId');
@@ -35,7 +35,7 @@ export default function Page() {
 
     const nullFixPatientId = patientId ?? "";
     const imageSrc = patientImages[nullFixPatientId];
-    
+
 
     const endSimulation = () => {
         router.push("/simulation_selection");
@@ -48,7 +48,7 @@ export default function Page() {
             setSimulationId(Number(simId));
             setPatientIdDatabase(Number(patId));
         }
-    },[searchParams])
+    }, [searchParams])
 
     return (
 
@@ -93,23 +93,23 @@ export default function Page() {
 
                 >Diagnose</button>
 
-                <button className="btn btn-primary translate-x-220"
+                <button className="btn simulationEndButton"
                     onClick={() => endSimulation()}
 
                 >End simulation</button>
 
             </nav>
 
-            <div className="flex h-screen">
+            <div className="simulationPageMainDiv">
 
-                <div className="w-2/4 border border-black-400 p-4">
+                <div className="simulationPageLeftHalf">
 
-                    <div className="h-2/4 border border-black-400 p-4">
+                    <div className="simulationPageTopLeftQuarter">
 
 
                         <PatientInformation
                             patientId={patientId}
-                            simulationId = {simulationId}
+                            simulationId={simulationId}
                             isOpen={isPatientInformationOpen}
                             onClose={() => setIsPatientInformationOpen(false)}
                         />
@@ -128,7 +128,7 @@ export default function Page() {
                         />
 
                         <Diagnose
-                        userId={user?.id}
+                            userId={user?.id}
                             simulationId={simulationId}
                             isOpen={isDiagnoseOpen}
                             onClose={() => setIsDiagnoseOpen(false)}
@@ -137,42 +137,38 @@ export default function Page() {
 
                     </div>
 
-                    <div className="h-2/4 border border-black-400 p-4">
+                    <div className="simulationPageBottomLeftQuarter">
 
-                        
-                       { simulationId && (<ActivityLog 
+
+                        {simulationId && (<ActivityLog
                             simulationId={simulationId}
 
                         />)}
-                            
-                        
+
+
                     </div>
 
                 </div>
 
-                <div className="w-2/4 border border-black-400 p-6">
+                <div className="simulationPageRightHalf">
 
-                    <div className="flex justify-center h-2/4 border border-black-400 p-4">
+                    <div className="simulationPageTopRightQuarter">
 
                         <Image
                             src={imageSrc}
                             alt="Patient"
                             height={550}
-                            className="rounded border border-gray-400"
+                            className="patientImage"
 
                         />
 
                     </div>
 
-                    <div className="flex-c justify-center h-2/4 border border-black-400 p-4">
+                    <div className="simulationPageBottomRightQuarter">
 
                         <PatientDialogue
                             simulationId={simulationId}
-                        
-                        
                         />
-
-
                     </div>
                 </div>
             </div>

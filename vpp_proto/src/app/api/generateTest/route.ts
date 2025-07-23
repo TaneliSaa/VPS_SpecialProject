@@ -43,9 +43,9 @@ export async function POST(req: Request) {
         const condition = rows[0].condition_name;
 
         const prompt = `
-        Generate realistic diagnostic test results for a patient with the following condition: "${condition}"
-
-        Only respond with a JSON array in this format - do not include any explanations:
+        -Generate realistic diagnostic test results for a patient with the following condition: "${condition}."
+        -Use short names, if the name is long (for example ELectrocardiogram: use: ECG).
+        -Only respond with a JSON array in this format - do not include any explanations:
 
         [
             {
@@ -59,7 +59,7 @@ export async function POST(req: Request) {
             }
         ]
 
-        Only return valid JSON.`;
+        -Only return valid JSON.`;
 
         const completion = await groq.chat.completions.create({
             model: "llama3-70b-8192",

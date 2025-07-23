@@ -31,25 +31,25 @@ const PatientInformation = ({ patientId, simulationId, isOpen, onClose }: Props)
   const [currentMedication, setCurrentMedication] = useState("");
   const [symptoms, setSymptoms] = useState("");
   const [lifestyle, setLifestyle] = useState("");
-  const {user} = useAuth();
+  const { user } = useAuth();
 
 
   const saveData = async () => {
 
     const res = await fetch("/api/userPatientInformationInputs", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({
-          user_id: user?.id,
-          simulation_id: simulationId,
-          name: name,
-          sex: sex,
-          age: age,
-          medical_history: medicalHistory,
-          current_medication: currentMedication,
-          symptoms: symptoms,
-          lifestyle: lifestyle 
-        })
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        user_id: user?.id,
+        simulation_id: simulationId,
+        name: name,
+        sex: sex,
+        age: age,
+        medical_history: medicalHistory,
+        current_medication: currentMedication,
+        symptoms: symptoms,
+        lifestyle: lifestyle
+      })
     });
 
     if (res.ok) {
@@ -59,7 +59,7 @@ const PatientInformation = ({ patientId, simulationId, isOpen, onClose }: Props)
       console.log("DATA: ", res);
     }
 
-    
+
   };
 
   useEffect(() => {
@@ -83,15 +83,15 @@ const PatientInformation = ({ patientId, simulationId, isOpen, onClose }: Props)
     fetchPatient();
   }, [patientId]);
 
-  
-  
+
+
 
   if (!isOpen) return null;
 
   return (
-    <div>
-      <h2 className="text-lg font-bold">Patient Information</h2>
-      <ul className="text-md space-y-1">
+    <div className="">
+      <h2 className="heading2">Patient Information</h2>
+      <ul className="spacedUl">
         <li>
           <strong>Name: </strong>
           <input
@@ -163,19 +163,23 @@ const PatientInformation = ({ patientId, simulationId, isOpen, onClose }: Props)
         </li>
       </ul>
 
-      <button
-        onClick={onClose}
-        className="btn btn-primary translate-y-40"
-      >
-        Close
-      </button>
 
-      <button
-        onClick={saveData}
-        className="btn btn-primary translate-y-40 translate-x-5"
-      >
-        Save
-      </button>
+      <div className="buttonBox">
+
+        <button
+          onClick={saveData}
+          className="btn btn-primary"
+        >
+          Save
+        </button>
+
+        <button
+          onClick={onClose}
+          className="btn btn-primary"
+        >
+          Close
+        </button>
+      </div>
     </div>
   );
 };

@@ -11,7 +11,7 @@
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
+} 
 
 body {
   background: var(--background);
@@ -30,27 +30,131 @@ body {
   }
 
   .input {
-    @apply border p-2
+    @apply border p-2;
   }
 
   .heading1 {
-    @apply mb-4 text-4xl px-2 text-white bg-blue-600 rounded-sm dark:bg-blue-500
+    @apply mb-4 text-4xl px-2 text-white bg-blue-600 rounded-sm dark:bg-blue-500;
   }
 
   .testBox {
-    @apply items-center gap-4 border-2 border-dashed border-blue-500 p-8
+    @apply items-center gap-4 border-2 border-dashed border-blue-500 p-8;
   }
 
   .navbarStyle {
-    @apply bg-blue-600 p-4 text-white text-xl text-center
+    @apply bg-blue-600 p-4 text-white text-xl text-center;
   }
 
   .navbarSimulations {
-    @apply flex items-center gap-6 bg-gray-400 p-4 text-white text-xl
+    @apply relative flex items-center gap-6 bg-gray-400 p-4 text-white text-xl;
   }
 
   .activityLog {
-    @apply border p-3 rounded-lg bg-gray-400 shadow-lg max-h-106 overflow-auto
+    @apply border p-3 rounded-lg bg-gray-400 shadow-lg max-h-106 overflow-auto;
+  }
+
+  .heading2 {
+    @apply text-lg font-semibold;
+  }
+
+  .heading3 {
+    @apply text-lg font-bold mb-2;
+  }
+
+  .spacedUl {
+    @apply mt-2 space-y-2;
+  }
+
+  .spanBold {
+    @apply font-semibold;
+  }
+
+  .borderedLi {
+    @apply border-b py-1;
+  }
+
+  .labelNormal {
+    @apply block text-sm font-medium;
+  }
+
+  .diagnosisInput {
+    @apply w-full p-2 mt-1 border;
+  }
+
+  .buttonBox {
+    @apply absolute bottom-0 left-0 mt-3 flex gap-2;
+  }
+
+  .patientResponseTextArea {
+    @apply w-[550px] h-[200px] border border-gray-400 rounded p-2 resize-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2;
+  }
+
+  .userQuestionInputArea {
+    @apply w-[550px] h-[50px] border border-gray-400 rounded p-2 resize-none;
+  }
+
+  .testButtonsBox {
+    @apply absolute flex gap-2 left-0 p-2 max-w-full;
+  }
+
+  .testPopUpPlacement {
+    @apply fixed inset-0 flex items-center justify-center;
+  }
+
+  .testPopUpStyle {
+    @apply relative bg-gray-400 p-6 rounded-lg shadow-md w-[400px];
+  }
+
+  .simulationPageMainDiv {
+    @apply flex h-screen;
+  }
+
+  .simulationPageLeftHalf {
+    @apply w-2/4 border border-black p-4;
+  }
+
+  .simulationPageTopLeftQuarter {
+    @apply relative h-2/4 border border-black p-4;
+  }
+
+  .simulationPageBottomLeftQuarter {
+    @apply h-2/4 border border-black p-4;
+  }
+
+  .simulationPageRightHalf {
+    @apply w-2/4 border border-black p-6;
+  }
+
+  .simulationPageTopRightQuarter {
+    @apply flex justify-center h-2/4 border border-black p-4;
+  }
+
+  .patientImage {
+    @apply rounded border border-gray-400;
+  }
+
+  .simulationPageBottomRightQuarter {
+    @apply relative justify-center h-2/8;
+  }
+
+  .simulationEndButton {
+    @apply bg-blue-500 hover:bg-blue-600 absolute right-4;
+  }
+
+  .simulationSelectionButtonPlacement {
+    @apply  h-screen flex justify-center items-center bg-gray-100
+  }
+
+  .simulationSelectionButtonBox {
+    @apply flex flex-col items-center gap-4 border-2 border-dashed border-blue-500 p-8
+  }
+
+  .loginForm {
+    @apply flex flex-col items-center gap-4
+  }
+
+  .questionInputBox {
+    @apply absolute left-1/2 top-[calc(50%+130px)] -translate-x-69 flex gap-2;
   }
 
 }

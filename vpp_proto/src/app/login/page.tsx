@@ -27,12 +27,9 @@ export default function Page() {
 
     return (
         <div >
-
-
-
-
             <div className="testBox">
-                <form onSubmit={handleLogin} className="flex flex-col items-center gap-4">
+                <form onSubmit={handleLogin} className="loginForm">
+
 
                     <h1 className="heading1">Login</h1>
                     <input

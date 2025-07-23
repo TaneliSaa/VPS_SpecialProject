@@ -7,21 +7,21 @@ interface Props {
 }
 
 
-const PatientIntroduction = ({isOpen, onClose, simulationId}: Props)=> {
-    const [background,setBackGround] = useState("");
+const PatientIntroduction = ({ isOpen, onClose, simulationId }: Props) => {
+    const [background, setBackGround] = useState("");
 
-    
+
 
 
     useEffect(() => {
 
-        const fetchPatientBackground = async() => {
+        const fetchPatientBackground = async () => {
             if (!simulationId) return;
 
             try {
-                const res = await fetch("/api/getPatientInformation?simulation",{
+                const res = await fetch("/api/getPatientInformation?simulation", {
                     method: "POST",
-                    headers: {"Content-Type": "application/json"},
+                    headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
                         simulation_id: simulationId,
                     }),
@@ -41,9 +41,9 @@ const PatientIntroduction = ({isOpen, onClose, simulationId}: Props)=> {
         };
         fetchPatientBackground();
 
-        
 
-    },[simulationId])
+
+    }, [simulationId])
 
 
     if (!isOpen) return null;
@@ -53,17 +53,23 @@ const PatientIntroduction = ({isOpen, onClose, simulationId}: Props)=> {
         <div>
 
             <h2 className="text-lg font-bold">Patient Introduction</h2>
-            
+
             <div>
                 <p>{background}</p>
             </div>
 
-            <button
-                className="btn btn-primary translate-y-87"
-                onClick={onClose}
-            >
-                Close
-            </button>
+            <div className="buttonBox">
+
+                <button
+                    className="btn btn-primary"
+                    onClick={onClose}
+                >
+                    Close
+                </button>
+
+
+            </div>
+
         </div>
     );
 };

@@ -17,6 +17,8 @@ interface TestResult {
 const TakeTests = ({ isOpen, onClose, simulationId, patientId }: Props) => {
 
     const [testButtons, setTestButtons] = useState<TestResult[]>([]);
+    const [selectedTest, setSelectedTest] = useState<TestResult | null>(null);
+    const [showTestResult, setShowTestResult] = useState(false);
 
 
 
@@ -49,22 +51,28 @@ const TakeTests = ({ isOpen, onClose, simulationId, patientId }: Props) => {
         fetchTests();
     }, [patientId]);
 
+    const openTestResults = (test: TestResult) => {
+        setSelectedTest(test);
+        setShowTestResult(true);
+    }
 
-    
+
+
 
     if (!isOpen) return null;
     return (
 
         <div>
 
-            <h2 className="text-lg font-bold">Take Test</h2>
+            <h2 className="heading2">Take Test</h2>
 
 
-            <div className="flex col gap-2">
+            <div className="testButtonsBox">
                 {testButtons.map((test, index) => (
                     <button
                         key={index}
                         className="btn btn-primary"
+                        onClick={() => openTestResults(test)}
                     >
                         {test.test_type}
                     </button>
@@ -73,13 +81,33 @@ const TakeTests = ({ isOpen, onClose, simulationId, patientId }: Props) => {
                 }
             </div>
 
+            <div className="buttonBox">
 
-            <button
-                onClick={onClose}
-                className="btn btn-primary translate-y-75"
-            >
-                Close
-            </button>
+                <button
+                    onClick={onClose}
+                    className="btn btn-primary"
+                >
+                    Close
+                </button>
+
+
+            </div>
+
+            {showTestResult && selectedTest && (
+                <div className="testPopUpPlacement">
+                    <div className="testPopUpStyle">
+                        <h3 className="headings3">{selectedTest.test_type} Result</h3>
+                        <p>{selectedTest.result}</p>
+                        
+                        <button
+                            className="btn btn-primary"
+                            onClick={() => setShowTestResult(false)}
+                        >
+                            Close
+                        </button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

@@ -36,19 +36,19 @@ const Diagnose = ({ userId, simulationId, isOpen, onClose }: Props) => {
 
     return (
         <div>
-            <h2 className="text-lg font-bold">Diagnose</h2>
-            <label className="block text-sm font-medium" />
+            <h2 className="heading2">Diagnose</h2>
+            <label className="labelNormal" />
             Enter your diagnosis:
             <input
                 type="text"
                 value={diagnosis}
                 onChange={(e) => setDiagnosis(e.target.value)}
-                className="w-full p-2 mt-1 border rounder-lg"
+                className="diagnosisInput"
                 placeholder="Type your diagnosis here..."
                 name="diagnosis input"
             >
             </input>
-            <div className="mt-3 flex gap-2 translate-y-70">
+            <div className="buttonBox">
                 <button
                     onClick={handleSubmit}
                     className="btn btn-primary"

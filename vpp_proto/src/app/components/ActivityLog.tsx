@@ -127,16 +127,16 @@ const ActivityLog = ({simulationId} : Props) => {
 
     return (
         <div className="activityLog">
-            <h2 className="text-lg font-semibold">
+            <h2 className="heading2">
                 Activity Log
             </h2>
-            <ul className="mt-2 space-y-2">
+            <ul className="spacedUl">
                 {log
                     .map((entry, index) => (
-                        <li key={index} className="border-b py-1">
-                            <span className="font-semibold">{entry.type}</span>:
+                        <li key={index} className="borderedLi">
+                            <span className="spanBold">{entry.type}</span>:
                             {entry.message}
-                            <span className=""> {formatTimeForActivityLog(entry.timestamp)}</span>
+                            <span> {formatTimeForActivityLog(entry.timestamp)}</span>
 
                         </li>
                     ))
