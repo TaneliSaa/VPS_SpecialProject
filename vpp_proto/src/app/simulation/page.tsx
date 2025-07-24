@@ -13,6 +13,7 @@ import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useAuth } from "../components/AuthContext";
 import PatientDialogue from "../components/PatientDialogue";
+import TreatmentPlan from "../components/TreatmentPlan";
 
 
 export default function Page() {
@@ -21,6 +22,7 @@ export default function Page() {
     const [isPatientIntroductionOpen, setIsPatientIntroductionOpen] = useState(false);
     const [isTakeTestOpen, setIsTakeTestOpen] = useState(false);
     const [isDiagnoseOpen, setIsDiagnoseOpen] = useState(false);
+    const [isTreatmentPlanOpen,setIsTreatmentPlanOpen] = useState(false);
     const [simulationId, setSimulationId] = useState<number | null>(null);
     const [patientIdDatabase, setPatientIdDatabase] = useState<number | null>(null);
     const { user } = useAuth();
@@ -32,9 +34,13 @@ export default function Page() {
         "2": patient2,
         "3": patient3,
     }
-
     const nullFixPatientId = patientId ?? "";
     const imageSrc = patientImages[nullFixPatientId];
+    const [dataRefresher,setDataRefresher] =useState(0);
+
+    const incrementDataRefresher = () => {
+        setDataRefresher((prev) => prev + 1);
+    }
 
 
     const endSimulation = () => {
@@ -60,6 +66,7 @@ export default function Page() {
                             ; setIsPatientInformationOpen(false)
                             ; setIsDiagnoseOpen(false)
                             ; setIsTakeTestOpen(false)
+                            ; setIsTreatmentPlanOpen(false);
                     }}
                 >Patient introduction</button>
 
@@ -68,7 +75,8 @@ export default function Page() {
                         setIsPatientInformationOpen(!isPatientInformationOpen)
                             ; setIsPatientIntroductionOpen(false)
                             ; setIsDiagnoseOpen(false)
-                            ; setIsTakeTestOpen(false);
+                            ; setIsTakeTestOpen(false)
+                            ; setIsTreatmentPlanOpen(false);
                     }}
 
                 >Patient information</button>
@@ -78,7 +86,8 @@ export default function Page() {
                         setIsTakeTestOpen(!isTakeTestOpen)
                             ; setIsPatientIntroductionOpen(false)
                             ; setIsDiagnoseOpen(false)
-                            ; setIsPatientInformationOpen(false);
+                            ; setIsPatientInformationOpen(false)
+                            ; setIsTreatmentPlanOpen(false);
                     }}
 
                 >Take tests</button>
@@ -88,10 +97,21 @@ export default function Page() {
                         setIsDiagnoseOpen(!isDiagnoseOpen)
                             ; setIsPatientIntroductionOpen(false)
                             ; setIsPatientInformationOpen(false)
-                            ; setIsTakeTestOpen(false);
+                            ; setIsTakeTestOpen(false)
+                            ; setIsTreatmentPlanOpen(false);
                     }}
 
                 >Diagnose</button>
+
+                <button className="btn btn-primary"
+                    onClick={() => {
+                        setIsTreatmentPlanOpen(!isTreatmentPlanOpen)
+                        ; setIsDiagnoseOpen(false)
+                        ; setIsPatientInformationOpen(false)
+                        ; setIsPatientIntroductionOpen(false)
+                        ; setIsTakeTestOpen(false);
+                    }}
+                > Treatment Plan</button>
 
                 <button className="btn simulationEndButton"
                     onClick={() => endSimulation()}
@@ -112,6 +132,7 @@ export default function Page() {
                             simulationId={simulationId}
                             isOpen={isPatientInformationOpen}
                             onClose={() => setIsPatientInformationOpen(false)}
+                            onSave={incrementDataRefresher}
                         />
 
                         <PatientIntroduction
@@ -132,6 +153,13 @@ export default function Page() {
                             simulationId={simulationId}
                             isOpen={isDiagnoseOpen}
                             onClose={() => setIsDiagnoseOpen(false)}
+                        />
+
+                        <TreatmentPlan 
+                            simulationId={simulationId}
+                            isOpen={isTreatmentPlanOpen}
+                            onClose={() => setIsTreatmentPlanOpen(false)}
+                            refreshTrigger={dataRefresher}
                         />
 
 

@@ -8,6 +8,7 @@ interface Props {
   simulationId: number | null;
   isOpen: boolean;
   onClose: () => void;
+  onSave: () => void;
 }
 
 interface Patient {
@@ -22,7 +23,7 @@ interface Patient {
 
 }
 
-const PatientInformation = ({ patientId, simulationId, isOpen, onClose }: Props) => {
+const PatientInformation = ({ patientId, simulationId, isOpen, onClose, onSave }: Props) => {
   const [patient, setPatient] = useState<Patient | null>(null);
   const [name, setName] = useState("");
   const [sex, setSex] = useState("");
@@ -32,7 +33,7 @@ const PatientInformation = ({ patientId, simulationId, isOpen, onClose }: Props)
   const [symptoms, setSymptoms] = useState("");
   const [lifestyle, setLifestyle] = useState("");
   const { user } = useAuth();
-
+  
 
   const saveData = async () => {
 
@@ -54,6 +55,7 @@ const PatientInformation = ({ patientId, simulationId, isOpen, onClose }: Props)
 
     if (res.ok) {
       alert("Patient data saved!")
+      onSave();
     } else {
       alert("Something went wrong.")
       console.log("DATA: ", res);
