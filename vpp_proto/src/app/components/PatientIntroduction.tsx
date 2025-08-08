@@ -52,7 +52,7 @@ const PatientIntroduction = ({ isOpen, onClose, simulationId }: Props) => {
 
         <div>
 
-            <h2 className="text-lg font-bold">Patient Introduction</h2>
+            <h2 className="heading2">Patient Introduction</h2>
 
             <div>
                 <p>{background}</p>

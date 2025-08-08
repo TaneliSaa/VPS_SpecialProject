@@ -54,7 +54,7 @@ body {
   }
 
   .heading2 {
-    @apply text-lg font-semibold;
+    @apply text-2xl font-semibold;
   }
 
   .heading3 {
@@ -155,6 +155,38 @@ body {
 
   .questionInputBox {
     @apply absolute left-1/2 top-[calc(50%+130px)] -translate-x-69 flex gap-2;
+  }
+
+  .divCentered {
+    @apply fixed flex inset-0 items-center justify-center z-50
+  }
+
+  .treatmentPlanDiv {
+    @apply bg-white rounded-lg shadow-lg p-6 max-w-4xl w-full overflow-y-auto max-h-[90vh]
+  }
+
+  .headingDiv {
+    @apply flex justify-between items-center mb-4
+  }
+
+  .gridCol2 {
+    @apply grid grid-cols-2 gap-4 mb-4
+  }
+
+  .mb4 {
+    @apply mb-4
+  }
+
+  .labelMb2 {
+    @apply block font-semibold mb-2
+  }
+
+  .textAreaRounded {
+    @apply w-full border rounded p-2
+  }
+
+  .buttonBoxBottomLeft {
+    @apply bottom-0 left-0 mt-3 flex gap-2
   }
 
 }

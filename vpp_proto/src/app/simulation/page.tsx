@@ -153,6 +153,7 @@ export default function Page() {
                             simulationId={simulationId}
                             isOpen={isDiagnoseOpen}
                             onClose={() => setIsDiagnoseOpen(false)}
+                            onSave={incrementDataRefresher}
                         />
 
                         <TreatmentPlan 

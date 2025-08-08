@@ -7,13 +7,12 @@ interface Props {
     simulationId: number | null;
     isOpen: Boolean;
     onClose: () => void;
+    onSave: () => void;
 }
 
-const Diagnose = ({ userId, simulationId, isOpen, onClose }: Props) => {
+const Diagnose = ({ userId, simulationId, isOpen, onClose, onSave }: Props) => {
 
     const [diagnosis, setDiagnosis] = useState("");
-
-    if (!isOpen) return null;
 
     const handleSubmit = async () => {
         const res = await fetch("/api/diagnosis", {
@@ -28,11 +27,14 @@ const Diagnose = ({ userId, simulationId, isOpen, onClose }: Props) => {
 
         if (res.ok) {
             alert("Diagnosis saved!");
+            onSave();
         } else {
             alert("Something went wrong.");
             console.log(res);
         }
     };
+
+    if (!isOpen) return null;
 
     return (
         <div>
